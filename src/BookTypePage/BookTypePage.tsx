@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 
+import "./BookTypePage.css";
 
 interface BookTypeRequest {
     bookTypeId : number;
@@ -105,8 +106,8 @@ function BookTypePage(){
     }
 
     return <>
-        <div>
-            <div>
+        <div className="custom-form">
+            <div className="custom-row-form">
                 <label>{labelInput} :</label>
                 <input type="text"
                        value={bookTypeName}
@@ -115,10 +116,13 @@ function BookTypePage(){
                     resetData();
                 }}>reset</button>
             </div>
-            <div>
+            <div className="custom-row-form">
                 <button onClick={() => onSave()}>SAVE</button>
             </div>
-            <table border={1}>
+        </div>
+
+        <div className="custom-div-table">
+            <table className="custom-table" border={1}>
                 <thead>
                     <tr>
                         <th>ID</th>
