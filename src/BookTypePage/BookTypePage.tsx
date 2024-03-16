@@ -1,13 +1,15 @@
 import {useEffect, useState} from "react";
+import type { ConfigProviderProps } from 'antd';
 
 import "./BookTypePage.css";
+import {Button} from "antd";
 
 interface BookTypeRequest {
     bookTypeId : number;
     bookTypeName : string;
 }
 
-interface BookTypeResponse {
+export interface BookTypeResponse {
     bookTypeId:number;
     bookTypeName:string;
 }
@@ -16,8 +18,11 @@ interface APIResult {
     message : string;
 }
 
+type SizeType = ConfigProviderProps['componentSize'];
+
 function BookTypePage(){
 
+    const [size, setSize] = useState<SizeType>('small');
     const [bookTypeId,setBookTypeId] = useState<number>(0);
     const [bookTypeName,setBookTypeName] = useState("");
     const [bookTypes,setBookTypes] = useState<Array<BookTypeResponse>>([]);
@@ -136,11 +141,25 @@ function BookTypePage(){
                         return <tr key={item.bookTypeId}>
                                     <td>{index+1}</td>
                                     <td>{item.bookTypeName}</td>
-                                    <td>
-                                        <button onClick={() => onDelete(item.bookTypeId)}>Delete</button>
+                                    <td align="center">
+                                        <Button type="primary" danger
+                                                onClick={() => onDelete(item.bookTypeId)}
+                                                size={size}
+                                        >Delete</Button>
                                     </td>
                                     <td align="center">
-                                        <button onClick={() => onEdit(item)}>Edit</button>
+                                        <Button type="primary"
+                                                size={size}
+                                                style={{
+                                                    background : '#34bdeb',
+                                                    borderColor: 'black',
+                                                    color : 'white'
+                                                }}
+                                                onClick={() => onEdit(item)}
+                                        >
+                                            Edit
+                                        </Button>
+
                                     </td>
                                </tr>;
                     })}
